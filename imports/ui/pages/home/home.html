@@ -1,0 +1,53 @@
+<template name="App_home">
+  {{#if logged}}
+  <div class="container app">
+    <div class="row app-one">
+      <div class="col-sm-4 side">
+        <div class="side-one">
+          <!-- Heading -->
+          {{> me}}
+          <!-- Heading End -->
+
+          <!-- SearchBox -->
+          <div class="row searchBox">
+            <div class="col-sm-12 searchBox-inner">
+              <div class="form-group has-feedback">
+                <input id="searchText" type="text" class="form-control" name="searchText" placeholder="Search">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Box End -->
+          <!-- sideBar -->
+          <div class="row sideBar">
+            {{#each user in users}}
+              {{> itemList selected=(selected user) at='18:06' text=user.username click=click data=user avatar='http://icons.iconarchive.com/icons/graphicloads/100-flat/256/contact-icon.png'}}
+            {{else}}
+              <div class="wrapper-message">
+                {{> itemList text="no chats"}}
+              </div>
+            {{/each}}
+          </div>
+          <!-- Sidebar End -->
+        </div>
+        <div class="side-two {{#if showProfile}}side-open{{/if}}">
+          {{> profile close=close}}
+        </div>
+        <!-- Sidebar End -->
+      </div>
+      <!-- New Message Sidebar End -->
+      <!-- Conversation Start -->
+      <div class="col-sm-8 conversation">
+        {{#if hasChat}}
+        {{> conversation chat}}
+        {{/if}}
+      </div>
+    </div>
+    <!-- App One End -->
+  </div>
+  {{else}}
+  {{> login}}
+  <!-- Conversation End -->
+  {{/if}}
+</template>
